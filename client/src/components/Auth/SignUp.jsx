@@ -8,7 +8,7 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="h-screen justify-center w-full grid md:grid-cols-2  bg-blue-900">
+      <div className="h-screen justify-center w-full grid md:grid-cols-2  bg-blue-950">
         <div className="justify-center items-center hidden md:flex flex-col">
           <div>
             <h1
@@ -24,6 +24,7 @@ export default function SignUp() {
           <img
             width={"400px"}
             src="https://i.postimg.cc/L5ttXF89/vecteezy-dollar-money-bag-with-coins-and-papers-15275954-996.png"
+            alt="image"
           />
         </div>
         <div className="p-3 flex justify-center items-center w-full">

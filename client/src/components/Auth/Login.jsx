@@ -1,10 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const [formData, setFormData] = useState({
+    // email: "",
+    // password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.email === undefined || formData.password === undefined) {
+      toast.error("All fields are required", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      console.log(formData.email, formData.password);
+      navigate("/");
+    }
+  };
+
   return (
     <>
-      <section className="h-screen justify-center w-full grid md:grid-cols-2  bg-blue-900">
+      <section className="h-screen justify-center w-full grid md:grid-cols-2  bg-blue-950">
         <div className="justify-center items-center hidden md:flex flex-col">
           <div>
             <h1
@@ -20,6 +55,8 @@ function Login() {
           <img
             width={"400px"}
             src="https://i.postimg.cc/L5ttXF89/vecteezy-dollar-money-bag-with-coins-and-papers-15275954-996.png"
+            alt="image"
+            className="text-white"
           />
         </div>
         <div className="flex items-center w-full">
@@ -45,23 +82,30 @@ function Login() {
               </div>
             </div>
             <div className="w-full flex justify-center items-center">
-              <form className="w-full md:w-3/4  px-8 pt-6 pb-8 mb-4">
+              <form
+                onSubmit={handleSubmit}
+                className="w-full md:w-3/4  px-8 pt-6 pb-8 mb-4"
+              >
                 <div className="mv-4 flex flex-col gap-2">
                   <label className="text-left block text-white text-sm font-bold mb-2">
                     Email
                   </label>
                   <input
                     type="email"
+                    id="email"
                     className="border p-3 rounded-lg"
                     placeholder="Enter your Email"
+                    onChange={handleChange}
                   />
                   <label className="text-left block text-white text-sm font-bold mb-2">
                     Password
                   </label>
                   <input
                     type="password"
+                    id="password"
                     className="border p-3 rounded-lg"
                     placeholder="Enter your password"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="text-center mt-5">
@@ -75,6 +119,7 @@ function Login() {
               </form>
             </div>
           </div>
+          <ToastContainer />
         </div>
       </section>
     </>
